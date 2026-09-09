@@ -1,0 +1,19 @@
+.notfound-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+}
+
+.notfound-image {
+  width: 75vw;
+  height: 60vh;
+}
+.notfound-head {
+  font-weight: bold;
+  color: #ffffff;
+}
+.notfound-para {
+  color: #f8fafc;
+}

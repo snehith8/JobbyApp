@@ -1,0 +1,103 @@
+.body {
+  background-color: #000000;
+  display: flex;
+  height: 80vh;
+  justify-content: space-between;
+  padding-top: 2%;
+  overflow-y: auto;
+}
+.failure-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40vh;
+}
+.retry-button {
+  background-color: #4f46e5;
+  border: none;
+  padding: 2% 10%;
+  color: #f8fafc;
+  border-radius: 10px;
+}
+.similar-head {
+  color: #ffffff;
+  font-weight: bold;
+}
+.similar-card {
+  display: flex;
+  flex-wrap: wrap;
+}
+.emp-card {
+  padding: 3%;
+}
+.head {
+  color: #ffffff;
+}
+.job-card {
+  background-color: #272727;
+  margin-bottom: 3%;
+  border-radius: 10px;
+}
+.row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.row2 {
+  justify-content: space-between;
+}
+.width-1 {
+  padding-right: 5%;
+}
+.width-0 {
+  width: 20vw;
+}
+.card-job {
+  padding-left: 3%;
+}
+.job-title,
+.job-rating,
+.description {
+  color: #f1f5f9;
+  font-weight: bold;
+}
+.job-content {
+  padding: 3%;
+}
+.job-location,
+.job-emp,
+.job-pack,
+.company-para,
+.description-content {
+  color: #f1f5f9;
+}
+.start-icon {
+  color: #fbbf24;
+  padding-left: 2%;
+}
+.icon {
+  color: #ffffff;
+  padding-left: 2%;
+}
+.link {
+  text-decoration: none;
+}
+.similar-job-card {
+  width: 35vw;
+  margin-left: 1%;
+}
+.similar-skill-card {
+  width: 25vw;
+  margin-left: 1%;
+  margin-bottom: 1%;
+}
+.unlist {
+  list-style-type: none;
+  padding: 0%;
+}
+.skill-name {
+  padding-left: 10%;
+}
+p {
+  font-size: larger;
+}
