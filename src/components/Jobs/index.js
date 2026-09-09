@@ -26,6 +26,29 @@ const employmentTypesList = [
   },
 ]
 
+const locationList = [
+  {
+    label: 'Hyderabad',
+    locationId: 'HYDERABAD',
+  },
+  {
+    label: 'Bangalore',
+    locationId: 'BANGALORE',
+  },
+  {
+    label: 'Chennai',
+    locationId: 'CHENNAI',
+  },
+  {
+    label: 'Delhi',
+    locationId: 'DELHI',
+  },
+  {
+    label: 'Mumbai',
+    locationId: 'MUMBAI',
+  },
+]
+
 const salaryRangesList = [
   {
     salaryRangeId: '1000000',
@@ -54,6 +77,7 @@ class Jobs extends Component {
     searchInputValue: '',
     salaryRange: salaryRangesList[0].salaryRangeId,
     typeOfEmployment: [],
+    typeOfLocation: [],
   }
 
   componentDidMount() {
@@ -91,7 +115,8 @@ class Jobs extends Component {
 
   getJobs = async () => {
     this.setState({isLoading: true})
-    const {typeOfEmployment, salaryRange, searchInputValue} = this.state
+    const {typeOfEmployment, salaryRange, searchInputValue, typeOfLocation} =
+      this.state
     const employment = typeOfEmployment.join(',')
     console.log(employment, typeOfEmployment)
     const jwtToken = Cookies.get('jwt_token')
@@ -115,8 +140,15 @@ class Jobs extends Component {
         title: jobitem.title,
         packagePerAnnum: jobitem.package_per_annum,
       }))
+      const filteredJobs = jobsData.filter(job =>
+        typeOfLocation.length === 0
+          ? true
+          : typeOfLocation.some(
+              loc => loc.toLowerCase() === job.location.toLowerCase(),
+            ),
+      )
       this.setState({
-        jobsList: jobsData,
+        jobsList: filteredJobs,
         isLoading: false,
         isError: false,
       })
@@ -137,6 +169,20 @@ class Jobs extends Component {
       }
       return {
         typeOfEmployment: prevState.typeOfEmployment.filter(
+          eachItem => eachItem !== value,
+        ),
+      }
+    }, this.getJobs)
+  }
+
+  toggleLocationSelectedChecked = event => {
+    const {value, checked} = event.target
+    this.setState(prevState => {
+      if (checked) {
+        return {typeOfLocation: [...prevState.typeOfLocation, value]}
+      }
+      return {
+        typeOfLocation: prevState.typeOfLocation.filter(
           eachItem => eachItem !== value,
         ),
       }
@@ -286,6 +332,26 @@ class Jobs extends Component {
     </div>
   )
 
+  renderLocationMethod = () => (
+    <div className="emp-card">
+      <h1 className="head">Location</h1>
+      <ul className="unorder-list">
+        {locationList.map(type => (
+          <li className="list" key={type.locationId}>
+            <input
+              type="checkbox"
+              id={type.locationId}
+              value={type.locationId}
+              name={type.label}
+              onChange={this.toggleLocationSelectedChecked}
+            />
+            <label htmlFor={type.locationId}>{type.label}</label>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+
   renderSalaryRange = () => {
     const {salaryRange} = this.state
 
@@ -345,6 +411,8 @@ class Jobs extends Component {
             {this.renderEmploymentMethod()}
             <hr />
             {this.renderSalaryRange()}
+            <hr />
+            {this.renderLocationMethod()}
           </div>
           <div className="content-right">
             <div className="row-3">
